@@ -8,15 +8,17 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Logo/Icon
-              Icon(Icons.favorite, size: 100, color: AppTheme.primaryPink),
               const SizedBox(height: 40),
+
+              // Logo/Icon
+              Icon(Icons.favorite, size: 80, color: AppTheme.primaryPink),
+              const SizedBox(height: 32),
 
               // App Title
               Text(
@@ -24,59 +26,58 @@ class WelcomeScreen extends StatelessWidget {
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   color: AppTheme.primaryPink,
                   letterSpacing: 2,
+                  fontSize: 36,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12),
 
               // Subtitle
               Text(
                 'Cervical Cancer Risk Prediction',
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.copyWith(color: AppTheme.textGrey),
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  color: AppTheme.textGrey,
+                  fontSize: 16,
+                ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
 
               // Description Card
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(24.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
                       Text(
-                        'Empowering women with an app to detect cervical cancer risk early.',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge?.copyWith(height: 1.6),
+                        'Empowering women with tools for early detection and better outcomes.',
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          height: 1.5,
+                          fontSize: 14,
+                        ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 20),
 
                       // Features
                       _buildFeatureItem(
                         context,
                         Icons.check_circle,
-                        'Quick & Easy Assessment',
+                        'Quick Assessment',
                       ),
-                      const SizedBox(height: 12),
-                      _buildFeatureItem(
-                        context,
-                        Icons.security,
-                        'AI-Powered Prediction',
-                      ),
-                      const SizedBox(height: 12),
+                      const SizedBox(height: 10),
+                      _buildFeatureItem(context, Icons.security, 'AI-Powered'),
+                      const SizedBox(height: 10),
                       _buildFeatureItem(
                         context,
                         Icons.medical_services,
-                        'Personalized Recommendations',
+                        'Personalized Results',
                       ),
                     ],
                   ),
                 ),
               ),
-              const SizedBox(height: 48),
+              const SizedBox(height: 32),
 
               // Get Started Button
               ElevatedButton(
@@ -84,25 +85,30 @@ class WelcomeScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/input');
                 },
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Get Started'),
                     const SizedBox(width: 8),
-                    Icon(Icons.arrow_forward),
+                    Icon(Icons.arrow_forward, size: 18),
                   ],
                 ),
               ),
               const SizedBox(height: 16),
 
               // Disclaimer
-              Text(
-                'This tool is for informational purposes only and does not replace professional medical advice.',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontSize: 12,
-                  fontStyle: FontStyle.italic,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  'For informational purposes only. Not a substitute for medical advice.',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontSize: 11,
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 40),
             ],
           ),
         ),
