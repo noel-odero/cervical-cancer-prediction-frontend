@@ -25,12 +25,10 @@ class AppTheme {
         primary: primaryPink,
         secondary: accentPink,
         surface: cardBackground,
-        background: darkBackground,
         error: dangerRed,
         onPrimary: textWhite,
         onSecondary: textWhite,
         onSurface: textWhite,
-        onBackground: textWhite,
       ),
 
       appBarTheme: AppBarTheme(
