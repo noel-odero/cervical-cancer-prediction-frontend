@@ -5,7 +5,7 @@ import '../models/prediction_response.dart';
 class ResultsScreen extends StatelessWidget {
   final PredictionResponse response;
 
-  const ResultsScreen({Key? key, required this.response}) : super(key: key);
+  const ResultsScreen({super.key, required this.response});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class ResultsScreen extends StatelessWidget {
                       end: Alignment.bottomRight,
                       colors: [
                         AppTheme.cardBackground,
-                        AppTheme.cardBackground.withOpacity(0.8),
+                        AppTheme.cardBackground.withValues(alpha: 0.8),
                       ],
                     ),
                   ),
@@ -65,7 +65,7 @@ class ResultsScreen extends StatelessWidget {
                           vertical: 12,
                         ),
                         decoration: BoxDecoration(
-                          color: riskColor.withOpacity(0.2),
+                          color: riskColor.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(color: riskColor, width: 2),
                         ),
@@ -113,7 +113,7 @@ class ResultsScreen extends StatelessWidget {
                           color: AppTheme.darkBackground,
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
-                            color: AppTheme.textGrey.withOpacity(0.3),
+                            color: AppTheme.textGrey.withValues(alpha: 0.3),
                           ),
                         ),
                         child: Text(
@@ -168,10 +168,10 @@ class ResultsScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: AppTheme.warningOrange.withOpacity(0.1),
+                  color: AppTheme.warningOrange.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: AppTheme.warningOrange.withOpacity(0.5),
+                    color: AppTheme.warningOrange.withValues(alpha: 0.5),
                   ),
                 ),
                 child: Row(

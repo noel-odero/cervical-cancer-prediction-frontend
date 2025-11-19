@@ -8,7 +8,7 @@ void main() {
 }
 
 class CervicalCancerPredictionApp extends StatelessWidget {
-  const CervicalCancerPredictionApp({Key? key}) : super(key: key);
+  const CervicalCancerPredictionApp({super.key});
 
   @override
   Widget build(BuildContext context) {

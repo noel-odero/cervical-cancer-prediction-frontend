@@ -6,7 +6,7 @@ import '../services/api_service.dart';
 import 'results_screen.dart';
 
 class InputFormScreen extends StatefulWidget {
-  const InputFormScreen({Key? key}) : super(key: key);
+  const InputFormScreen({super.key});
 
   @override
   State<InputFormScreen> createState() => _InputFormScreenState();

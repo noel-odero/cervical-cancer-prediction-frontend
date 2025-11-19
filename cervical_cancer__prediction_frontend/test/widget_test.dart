@@ -7,7 +7,7 @@
 
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:cervical_cancer__prediction_frontend/main.dart';
+import 'package:cervical_cancer_prediction_frontend/main.dart';
 
 void main() {
   testWidgets('App launches with welcome screen', (WidgetTester tester) async {

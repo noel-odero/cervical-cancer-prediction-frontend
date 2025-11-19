@@ -67,11 +67,11 @@ class AppTheme {
         fillColor: cardBackground,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: textGrey.withOpacity(0.3)),
+          borderSide: BorderSide(color: textGrey.withValues(alpha: 0.3)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: textGrey.withOpacity(0.3)),
+          borderSide: BorderSide(color: textGrey.withValues(alpha: 0.3)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
@@ -86,7 +86,7 @@ class AppTheme {
           borderSide: BorderSide(color: dangerRed, width: 2),
         ),
         labelStyle: TextStyle(color: textGrey),
-        hintStyle: TextStyle(color: textGrey.withOpacity(0.6)),
+        hintStyle: TextStyle(color: textGrey.withValues(alpha: 0.6)),
         errorStyle: TextStyle(color: dangerRed),
         contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       ),
@@ -124,7 +124,7 @@ class AppTheme {
       iconTheme: IconThemeData(color: primaryPink, size: 24),
 
       dividerTheme: DividerThemeData(
-        color: textGrey.withOpacity(0.2),
+        color: textGrey.withValues(alpha: 0.2),
         thickness: 1,
       ),
     );
