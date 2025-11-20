@@ -105,3 +105,15 @@ app.*.map.json
 # Exceptions to above rules
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+# Firebase/Node.js related (from Firebase CLI installation)
+node_modules/
+package.json
+package-lock.json
+.firebaserc
+firebase.json
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
