@@ -14,23 +14,12 @@ A Flutter mobile application for predicting cervical cancer risk using AI-powere
 - **Fast & Responsive** - Optimized for smooth user experience
 - **Secure** - HTTPS API communication
 
-## Screenshots
+| Screen | Content | Image |
+|--------|--------|--------|
+| Welcome Screen | - App introduction and mission statement - Feature highlights - Get Started button | <img width="392" height="797" alt="image" src="https://github.com/user-attachments/assets/4c4809eb-7da6-4ad4-aafb-539bf6bb1729" />|
+| Input Form screen | - 10 medical input fields with validation - Helper text for each field - Loading indicator during prediction | <img width="381" height="802" alt="image" src="https://github.com/user-attachments/assets/1d284f27-69af-4eb6-b5e8-ab30efe88e53" />|
+| Result screen | - Risk score percentage - Risk level (color-coded) - Personalized recommendation - Option to start a new prediction | <img width="396" height="801" alt="image" src="https://github.com/user-attachments/assets/82c66341-83a9-4f40-8521-e12fd68a40d6" />|
 
-### Welcome Screen
-- App introduction and mission statement
-- Feature highlights
-- Get Started button
-
-### Input Form Screen
-- 10 medical input fields with validation
-- Helper text for each field
-- Loading indicator during prediction
-
-### Results Screen
-- Risk score percentage
-- Risk level (color-coded)
-- Personalized recommendation
-- Option to start a new prediction
 
 ## Project Structure
 
@@ -172,7 +161,7 @@ flutter build ios --release
 
 ## Medical Disclaimer
 
-⚠️ **Important Notice:**
+**Important Notice:**
 
 This application is a predictive tool and is NOT a substitute for professional medical diagnosis. The predictions provided are based on machine learning models and should be used for informational purposes only.
 
@@ -205,4 +194,5 @@ This project is created for educational and informational purposes.
 ---
 
 **Developed with love for better women's health outcomes**
+
 
