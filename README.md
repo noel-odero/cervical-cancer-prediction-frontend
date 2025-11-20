@@ -2,18 +2,17 @@
 
 A Flutter mobile application for predicting cervical cancer risk using AI-powered analysis. This app connects to a FastAPI backend to provide personalized risk assessments and recommendations.
 
-![App Theme](https://img.shields.io/badge/Theme-Dark%20Mode-FF0080)
+
 ![Platform](https://img.shields.io/badge/Platform-Flutter-02569B)
 ![API](https://img.shields.io/badge/API-FastAPI-009688)
 
 ## Features
 
-- 🎨 **Modern UI** - Beautiful dark theme with pink/magenta accents
-- 📝 **Smart Input Form** - 10 validated input fields with real-time validation
-- 🤖 **AI-Powered Prediction** - Machine learning model for risk assessment
-- 📊 **Visual Results** - Color-coded risk levels with detailed recommendations
-- ⚡ **Fast & Responsive** - Optimized for smooth user experience
-- 🔒 **Secure** - HTTPS API communication
+- **Smart Input Form** - 10 validated input fields with real-time validation
+- **AI-Powered Prediction** - Machine learning model for risk assessment
+- **Visual Results** - Color-coded risk levels with detailed recommendations
+- **Fast & Responsive** - Optimized for smooth user experience
+- **Secure** - HTTPS API communication
 
 ## Screenshots
 
@@ -194,18 +193,16 @@ This is a medical application. Any contributions should be:
 
 This project is created for educational and informational purposes.
 
-## Support
 
-For issues, questions, or feature requests, please contact the development team or open an issue in the repository.
 
 ## Acknowledgments
 
 - FastAPI backend team
-- Medical advisors and consultants
+- Kaggle datasets
 - Flutter community
 - Open source contributors
 
 ---
 
-**Developed with ❤️ for better women's health outcomes**
+**Developed with love for better women's health outcomes**
 
