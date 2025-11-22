@@ -1,77 +1,56 @@
 class PredictionRequest {
-  final int stds;
-  final int stdsNumber;
-  final int stdsCondylomatosis;
-  final int stdsVulvoPerinealCondylomatosis;
-  final int stdsHiv;
-  final int stdsNumberOfDiagnosis;
-  final int dxCancer;
-  final int dxHpv;
-  final int dx;
-  final int citology;
+  final int numberOfSexualPartners;
+  final int firstSexualIntercourse;
+  final int smokes; // 0 or 1
+  final int hormonalContraceptives; // 0 or 1
+  final int iudYears; // 0-20
+  final int stds; // 0 or 1
+  final int stdsNumber; // 0-10
+  final int stdsCervicalCondylomatosis; // 0 or 1
+  final int stdsPelvicInflammatoryDisease; // 0 or 1
+  final int stdsGenitalHerpes; // 0 or 1
 
   PredictionRequest({
+    required this.numberOfSexualPartners,
+    required this.firstSexualIntercourse,
+    required this.smokes,
+    required this.hormonalContraceptives,
+    required this.iudYears,
     required this.stds,
     required this.stdsNumber,
-    required this.stdsCondylomatosis,
-    required this.stdsVulvoPerinealCondylomatosis,
-    required this.stdsHiv,
-    required this.stdsNumberOfDiagnosis,
-    required this.dxCancer,
-    required this.dxHpv,
-    required this.dx,
-    required this.citology,
+    required this.stdsCervicalCondylomatosis,
+    required this.stdsPelvicInflammatoryDisease,
+    required this.stdsGenitalHerpes,
   });
 
   Map<String, dynamic> toJson() {
     return {
-      'STDs': stds,
-      'STDs (number)': stdsNumber,
-      'STDs:condylomatosis': stdsCondylomatosis,
-      'STDs:vulvo-perineal condylomatosis': stdsVulvoPerinealCondylomatosis,
-      'STDs:HIV': stdsHiv,
-      'STDs: Number of diagnosis': stdsNumberOfDiagnosis,
-      'Dx:Cancer': dxCancer,
-      'Dx:HPV': dxHpv,
-      'Dx': dx,
-      'Citology': citology,
+      "Number of sexual partners": numberOfSexualPartners,
+      "First sexual intercourse": firstSexualIntercourse,
+      "Smokes": smokes,
+      "Hormonal Contraceptives": hormonalContraceptives,
+      "IUD (years)": iudYears,
+      "STDs": stds,
+      "STDs (number)": stdsNumber,
+      "STDs:cervical condylomatosis": stdsCervicalCondylomatosis,
+      "STDs:pelvic inflammatory disease": stdsPelvicInflammatoryDisease,
+      "STDs:genital herpes": stdsGenitalHerpes,
     };
   }
 
-  // Validation methods
-  bool isValid() {
-    return _validateBinary(stds) &&
-        _validateRange(stdsNumber, 0, 20) &&
-        _validateBinary(stdsCondylomatosis) &&
-        _validateBinary(stdsVulvoPerinealCondylomatosis) &&
-        _validateBinary(stdsHiv) &&
-        _validateRange(stdsNumberOfDiagnosis, 0, 10) &&
-        _validateBinary(dxCancer) &&
-        _validateBinary(dxHpv) &&
-        _validateBinary(dx) &&
-        _validateBinary(citology);
-  }
-
-  bool _validateBinary(int value) {
-    return value == 0 || value == 1;
-  }
-
-  bool _validateRange(int value, int min, int max) {
-    return value >= min && value <= max;
-  }
-
-  factory PredictionRequest.fromMap(Map<String, int> data) {
+  factory PredictionRequest.fromMap(Map<String, dynamic> data) {
     return PredictionRequest(
+      numberOfSexualPartners: data['Number of sexual partners'] ?? 0,
+      firstSexualIntercourse: data['First sexual intercourse'] ?? 0,
+      smokes: data['Smokes'] ?? 0,
+      hormonalContraceptives: data['Hormonal Contraceptives'] ?? 0,
+      iudYears: data['IUD (years)'] ?? 0,
       stds: data['STDs'] ?? 0,
       stdsNumber: data['STDs (number)'] ?? 0,
-      stdsCondylomatosis: data['STDs:condylomatosis'] ?? 0,
-      stdsVulvoPerinealCondylomatosis: data['STDs:vulvo-perineal condylomatosis'] ?? 0,
-      stdsHiv: data['STDs:HIV'] ?? 0,
-      stdsNumberOfDiagnosis: data['STDs: Number of diagnosis'] ?? 0,
-      dxCancer: data['Dx:Cancer'] ?? 0,
-      dxHpv: data['Dx:HPV'] ?? 0,
-      dx: data['Dx'] ?? 0,
-      citology: data['Citology'] ?? 0,
+      stdsCervicalCondylomatosis: data['STDs:cervical condylomatosis'] ?? 0,
+      stdsPelvicInflammatoryDisease:
+          data['STDs:pelvic inflammatory disease'] ?? 0,
+      stdsGenitalHerpes: data['STDs:genital herpes'] ?? 0,
     );
   }
 }

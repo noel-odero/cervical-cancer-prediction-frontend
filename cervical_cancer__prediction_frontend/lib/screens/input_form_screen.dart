@@ -16,49 +16,28 @@ class _InputFormScreenState extends State<InputFormScreen> {
   final _formKey = GlobalKey<FormState>();
   final _apiService = ApiService();
   bool _isLoading = false;
-
-  // Controllers for all 10 fields
-  final TextEditingController _stdsController = TextEditingController();
+  bool _isFormValid = false;
+  // Controllers for numeric fields
+  final TextEditingController _partnersController = TextEditingController();
+  final TextEditingController _firstSexController = TextEditingController();
+  final TextEditingController _iudController = TextEditingController();
   final TextEditingController _stdsNumberController = TextEditingController();
-  final TextEditingController _stdsCondylomatosisController =
-      TextEditingController();
-  final TextEditingController _stdsVulvoPerinealController =
-      TextEditingController();
-  final TextEditingController _stdsHivController = TextEditingController();
-  final TextEditingController _stdsNumDiagnosisController =
-      TextEditingController();
-  final TextEditingController _dxCancerController = TextEditingController();
-  final TextEditingController _dxHpvController = TextEditingController();
-  final TextEditingController _dxController = TextEditingController();
-  final TextEditingController _citologyController = TextEditingController();
+
+  // Binary fields as switches (bool -> int mapping when building payload)
+  bool _smokes = false;
+  bool _hormonalContraceptives = false;
+  bool _stds = false;
+  bool _stdsCervicalCondylomatosis = false;
+  bool _stdsPelvicInflammatoryDisease = false;
+  bool _stdsGenitalHerpes = false;
 
   @override
   void dispose() {
-    _stdsController.dispose();
+    _partnersController.dispose();
+    _firstSexController.dispose();
+    _iudController.dispose();
     _stdsNumberController.dispose();
-    _stdsCondylomatosisController.dispose();
-    _stdsVulvoPerinealController.dispose();
-    _stdsHivController.dispose();
-    _stdsNumDiagnosisController.dispose();
-    _dxCancerController.dispose();
-    _dxHpvController.dispose();
-    _dxController.dispose();
-    _citologyController.dispose();
     super.dispose();
-  }
-
-  String? _validateBinary(String? value, String fieldName) {
-    if (value == null || value.isEmpty) {
-      return 'Please enter $fieldName';
-    }
-    final intValue = int.tryParse(value);
-    if (intValue == null) {
-      return 'Please enter a valid number';
-    }
-    if (intValue != 0 && intValue != 1) {
-      return 'Value must be 0 or 1';
-    }
-    return null;
   }
 
   String? _validateRange(String? value, String fieldName, int min, int max) {
@@ -86,18 +65,16 @@ class _InputFormScreenState extends State<InputFormScreen> {
 
     try {
       final request = PredictionRequest(
-        stds: int.parse(_stdsController.text),
+        numberOfSexualPartners: int.parse(_partnersController.text),
+        firstSexualIntercourse: int.parse(_firstSexController.text),
+        smokes: _smokes ? 1 : 0,
+        hormonalContraceptives: _hormonalContraceptives ? 1 : 0,
+        iudYears: int.parse(_iudController.text),
+        stds: _stds ? 1 : 0,
         stdsNumber: int.parse(_stdsNumberController.text),
-        stdsCondylomatosis: int.parse(_stdsCondylomatosisController.text),
-        stdsVulvoPerinealCondylomatosis: int.parse(
-          _stdsVulvoPerinealController.text,
-        ),
-        stdsHiv: int.parse(_stdsHivController.text),
-        stdsNumberOfDiagnosis: int.parse(_stdsNumDiagnosisController.text),
-        dxCancer: int.parse(_dxCancerController.text),
-        dxHpv: int.parse(_dxHpvController.text),
-        dx: int.parse(_dxController.text),
-        citology: int.parse(_citologyController.text),
+        stdsCervicalCondylomatosis: _stdsCervicalCondylomatosis ? 1 : 0,
+        stdsPelvicInflammatoryDisease: _stdsPelvicInflammatoryDisease ? 1 : 0,
+        stdsGenitalHerpes: _stdsGenitalHerpes ? 1 : 0,
       );
 
       final response = await _apiService.predictRisk(request);
@@ -158,6 +135,15 @@ class _InputFormScreenState extends State<InputFormScreen> {
               padding: const EdgeInsets.all(24.0),
               child: Form(
                 key: _formKey,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                onChanged: () {
+                  final valid = _formKey.currentState?.validate() ?? false;
+                  if (valid != _isFormValid) {
+                    setState(() {
+                      _isFormValid = valid;
+                    });
+                  }
+                },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -169,125 +155,143 @@ class _InputFormScreenState extends State<InputFormScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Enter 0 or 1 for most fields, except where noted',
+                      'Use switches for Yes/No fields and enter integers for numeric fields',
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 32),
-
-                    // Field 1: STDs
+                    // Field 1: Number of sexual partners (0-50)
                     _buildTextField(
-                      controller: _stdsController,
-                      label: 'STDs',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) => _validateBinary(value, 'STDs'),
-                      icon: Icons.medical_information,
+                      controller: _partnersController,
+                      label: 'Number of sexual partners',
+                      hint: 'Enter 0-50',
+                      validator: (value) => _validateRange(
+                        value,
+                        'Number of sexual partners',
+                        0,
+                        50,
+                      ),
+                      icon: Icons.group,
                     ),
                     const SizedBox(height: 16),
 
-                    // Field 2: STDs (number)
+                    // Field 2: First sexual intercourse (age 10-30)
+                    _buildTextField(
+                      controller: _firstSexController,
+                      label: 'First sexual intercourse',
+                      hint: 'Enter age (10-30)',
+                      validator: (value) => _validateRange(
+                        value,
+                        'First sexual intercourse',
+                        10,
+                        30,
+                      ),
+                      icon: Icons.cake,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Field 3: Smokes (Yes/No)
+                    SwitchListTile(
+                      title: const Text('Smokes'),
+                      value: _smokes,
+                      onChanged: (v) => setState(() => _smokes = v),
+                      secondary: Icon(
+                        Icons.smoking_rooms,
+                        color: AppTheme.primaryPink,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Field 4: Hormonal Contraceptives (Yes/No)
+                    SwitchListTile(
+                      title: const Text('Hormonal Contraceptives'),
+                      value: _hormonalContraceptives,
+                      onChanged: (v) =>
+                          setState(() => _hormonalContraceptives = v),
+                      secondary: Icon(
+                        Icons.medical_services,
+                        color: AppTheme.primaryPink,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Field 5: IUD (years) 0-20
+                    _buildTextField(
+                      controller: _iudController,
+                      label: 'IUD (years)',
+                      hint: 'Enter 0-20',
+                      validator: (value) =>
+                          _validateRange(value, 'IUD (years)', 0, 20),
+                      icon: Icons.timeline,
+                    ),
+                    const SizedBox(height: 16),
+
+                    // Field 6: STDs (Yes/No)
+                    SwitchListTile(
+                      title: const Text('STDs'),
+                      value: _stds,
+                      onChanged: (v) => setState(() => _stds = v),
+                      secondary: Icon(
+                        Icons.warning,
+                        color: AppTheme.primaryPink,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+
+                    // Field 7: STDs (number) 0-10
                     _buildTextField(
                       controller: _stdsNumberController,
                       label: 'STDs (number)',
-                      hint: 'Enter 0-20',
-                      validator: (value) =>
-                          _validateRange(value, 'STDs number', 0, 20),
-                      icon: Icons.numbers,
-                      helperText: 'Value between 0 and 20',
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Field 3: STDs:condylomatosis
-                    _buildTextField(
-                      controller: _stdsCondylomatosisController,
-                      label: 'STDs: Condylomatosis',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) =>
-                          _validateBinary(value, 'Condylomatosis'),
-                      icon: Icons.medical_information,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Field 4: STDs:vulvo-perineal condylomatosis
-                    _buildTextField(
-                      controller: _stdsVulvoPerinealController,
-                      label: 'STDs: Vulvo-perineal Condylomatosis',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) => _validateBinary(
-                        value,
-                        'Vulvo-perineal condylomatosis',
-                      ),
-                      icon: Icons.medical_information,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Field 5: STDs:HIV
-                    _buildTextField(
-                      controller: _stdsHivController,
-                      label: 'STDs: HIV',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) => _validateBinary(value, 'HIV'),
-                      icon: Icons.medical_information,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Field 6: STDs: Number of diagnosis
-                    _buildTextField(
-                      controller: _stdsNumDiagnosisController,
-                      label: 'STDs: Number of Diagnosis',
                       hint: 'Enter 0-10',
                       validator: (value) =>
-                          _validateRange(value, 'Number of diagnosis', 0, 10),
-                      icon: Icons.numbers,
-                      helperText: 'Value between 0 and 10',
+                          _validateRange(value, 'STDs (number)', 0, 10),
+                      icon: Icons.format_list_numbered,
                     ),
                     const SizedBox(height: 16),
 
-                    // Field 7: Dx:Cancer
-                    _buildTextField(
-                      controller: _dxCancerController,
-                      label: 'Dx: Cancer',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) =>
-                          _validateBinary(value, 'Cancer diagnosis'),
-                      icon: Icons.local_hospital,
+                    // Field 8: STDs:cervical condylomatosis (Yes/No)
+                    SwitchListTile(
+                      title: const Text('STDs:cervical condylomatosis'),
+                      value: _stdsCervicalCondylomatosis,
+                      onChanged: (v) =>
+                          setState(() => _stdsCervicalCondylomatosis = v),
+                      secondary: Icon(
+                        Icons.healing,
+                        color: AppTheme.primaryPink,
+                      ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
 
-                    // Field 8: Dx:HPV
-                    _buildTextField(
-                      controller: _dxHpvController,
-                      label: 'Dx: HPV',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) =>
-                          _validateBinary(value, 'HPV diagnosis'),
-                      icon: Icons.local_hospital,
+                    // Field 9: STDs:pelvic inflammatory disease (Yes/No)
+                    SwitchListTile(
+                      title: const Text('STDs:pelvic inflammatory disease'),
+                      value: _stdsPelvicInflammatoryDisease,
+                      onChanged: (v) =>
+                          setState(() => _stdsPelvicInflammatoryDisease = v),
+                      secondary: Icon(
+                        Icons.local_hospital,
+                        color: AppTheme.primaryPink,
+                      ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
 
-                    // Field 9: Dx
-                    _buildTextField(
-                      controller: _dxController,
-                      label: 'Dx',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) => _validateBinary(value, 'Diagnosis'),
-                      icon: Icons.local_hospital,
-                    ),
-                    const SizedBox(height: 16),
-
-                    // Field 10: Citology
-                    _buildTextField(
-                      controller: _citologyController,
-                      label: 'Citology',
-                      hint: 'Enter 0 or 1',
-                      validator: (value) => _validateBinary(value, 'Citology'),
-                      icon: Icons.science,
+                    // Field 10: STDs:genital herpes (Yes/No)
+                    SwitchListTile(
+                      title: const Text('STDs:genital herpes'),
+                      value: _stdsGenitalHerpes,
+                      onChanged: (v) => setState(() => _stdsGenitalHerpes = v),
+                      secondary: Icon(
+                        Icons.coronavirus,
+                        color: AppTheme.primaryPink,
+                      ),
                     ),
                     const SizedBox(height: 32),
 
                     // Submit Button
                     ElevatedButton(
-                      onPressed: _submitForm,
+                      onPressed: (!_isLoading && _isFormValid)
+                          ? _submitForm
+                          : null,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 4.0),
                         child: Text('Predict Risk'),
