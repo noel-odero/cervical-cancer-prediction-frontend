@@ -17,7 +17,7 @@ A Flutter mobile application for predicting cervical cancer risk using AI-powere
 | Screen | Content | Image |
 |--------|--------|--------|
 | Welcome Screen | - App introduction and mission statement - Feature highlights - Get Started button | <img width="392" height="797" alt="image" src="https://github.com/user-attachments/assets/4c4809eb-7da6-4ad4-aafb-539bf6bb1729" />|
-| Input Form screen | - 10 medical input fields with validation - Helper text for each field - Loading indicator during prediction | <img width="381" height="802" alt="image" src="https://github.com/user-attachments/assets/1d284f27-69af-4eb6-b5e8-ab30efe88e53" />|
+| Input Form screen | - 10 medical input fields with validation - Helper text for each field - Loading indicator during prediction | <img width="432" height="855" alt="image" src="https://github.com/user-attachments/assets/a7dee4c4-c12b-4eb0-a845-4382b9639d01" />|
 | Result screen | - Risk score percentage - Risk level (color-coded) - Personalized recommendation - Option to start a new prediction | <img width="396" height="801" alt="image" src="https://github.com/user-attachments/assets/82c66341-83a9-4f40-8521-e12fd68a40d6" />|
 
 
@@ -47,16 +47,16 @@ lib/
 
 ### Input Fields (10 total)
 
-1. **STDs** - 0 or 1
-2. **STDs (number)** - 0-20
-3. **STDs: Condylomatosis** - 0 or 1
-4. **STDs: Vulvo-perineal Condylomatosis** - 0 or 1
-5. **STDs: HIV** - 0 or 1
-6. **STDs: Number of Diagnosis** - 0-10
-7. **Dx: Cancer** - 0 or 1
-8. **Dx: HPV** - 0 or 1
-9. **Dx** - 0 or 1
-10. **Citology** - 0 or 1
+"Number of sexual partners"
+"First sexual intercourse"
+"Smokes"
+"Hormonal Contraceptives"
+"IUD (years)"
+"STDs"
+"STDs (number)"
+"STDs:cervical condylomatosis"
+"STDs:pelvic inflammatory disease"
+"STDs:genital herpes"
 
 ### Response Format
 
@@ -65,7 +65,7 @@ lib/
   "risk_score": 0.8,
   "risk_level": "VERY HIGH",
   "recommendation": "Immediate medical intervention required",
-  "model_used": "DecisionTreeRegressor"
+  "model_used": "LinearRegression"
 }
 ```
 
@@ -194,5 +194,6 @@ This project is created for educational and informational purposes.
 ---
 
 **Developed with love for better women's health outcomes**
+
 
 
