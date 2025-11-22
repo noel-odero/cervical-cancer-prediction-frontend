@@ -178,22 +178,17 @@ This is a medical application. Any contributions should be:
 - Privacy-compliant
 - Ethically sound
 
-## License
-
-This project is created for educational and informational purposes.
-
-
 
 ## Acknowledgments
 
 - FastAPI backend team
 - Kaggle datasets
 - Flutter community
-- Open source contributors
 
 ---
 
 **Developed with love for better women's health outcomes**
+
 
 
 
