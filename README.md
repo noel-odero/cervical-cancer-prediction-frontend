@@ -6,6 +6,13 @@ A Flutter mobile application for predicting cervical cancer risk using AI-powere
 ![Platform](https://img.shields.io/badge/Platform-Flutter-02569B)
 ![API](https://img.shields.io/badge/API-FastAPI-009688)
 
+
+## Problem Statement
+Delayed or inaccessible cervical cancer risk assessment leads to missed early detection and poorer patient outcomes.
+
+## Mission Statement
+Provide a fast, accessible, privacy‑respecting Flutter app that uses a validated prediction API to deliver actionable cervical cancer risk scores and screening recommendations.
+
 ## Features
 
 - **Smart Input Form** - 10 validated input fields with real-time validation
@@ -188,6 +195,7 @@ This is a medical application. Any contributions should be:
 ---
 
 **Developed with love for better women's health outcomes**
+
 
 
 
