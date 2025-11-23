@@ -21,6 +21,8 @@ Provide a fast, accessible, privacy‑respecting Flutter app that uses a validat
 - **Fast & Responsive** - Optimized for smooth user experience
 - **Secure** - HTTPS API communication
 
+[Link to the deployed mobile app](https://cervical-cancer-predictt.netlify.app/)
+
 | Screen | Content | Image |
 |--------|--------|--------|
 | Welcome Screen | - App introduction and mission statement - Feature highlights - Get Started button | <img width="392" height="797" alt="image" src="https://github.com/user-attachments/assets/4c4809eb-7da6-4ad4-aafb-539bf6bb1729" />|
@@ -195,6 +197,7 @@ This is a medical application. Any contributions should be:
 ---
 
 **Developed with love for better women's health outcomes**
+
 
 
 
